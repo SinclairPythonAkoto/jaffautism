@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2 style="text-align:center">Sinclair Connect!<br>Text Me</h2>
+<form action="{{ url_for('textMe') }}" method="post">
+  <div class="card">
+    <img src="/static/textMePic.jpeg" alt="John" style="width:100%">
+    <p class="title">Enter your text in the box below:</p>
+    <label for="textBox"></label>
+    <textarea id="textBox" rows="10" cols="35" name="sendText" placeholder="write your text message here..." required></textarea><br>
+    <input type="text" name="senderName" placeholder="enter your name here.." required>
+    <div style="margin: 24px 0;">
+      <a href="{{ url_for('home') }}"><i class="fa fa-comments"></i></a>
+      <a href="{{ url_for('textMe') }}"><i class="fa fa-user-circle-o"></i></a>
+      <a href="#"><i class="fa fa-at"></i></a> 
+    </div>
+    <p><button type="submit">Send Text!</button></p>
+  </div>
+</form>
+
+{% endblock %}
