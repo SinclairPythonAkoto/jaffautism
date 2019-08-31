@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
-{% block body %}
+{% block content %}
 
-<h1 style="text-align:center">Sinclair Connect!</h1>
-<form action="{{ url_for('home') }}" method="post">
+<h1 style="text-align:center">Jonny & Friends 4 Autism</h1>
+<form action="{{ url_for('JonnyAdmin') }}" method="post">
   <div class="card">
     <img src="/static/text-messaging.jpg" alt="textsms" style="width:100%">
     <label for="numUK">Enter <strong>UK number</strong> below:</label>
@@ -11,14 +11,17 @@
     <p class="title">Enter your text in the box below:</p>
     <label for="textBox"></label>
     <textarea id="textBox" rows="10" cols="35" name="sendText" placeholder="write your text message here..." required></textarea><br>
-    <p>Click <a href="">here</a> to send me a text.</p>
     <div style="margin: 24px 0;">
-      <a href="{{ url_for('home') }}"><i class="fa fa-comments"></i></a>
-      <a href="{{ url_for('textMe') }}"><i class="fa fa-user-circle-o"></i></a>
-      <a href="#"><i class="fa fa-at"></i></a> 
+      <a href="{{ url_for('JonnyAdmin') }}">Respond Jonny<i class="fa fa-comments"></i></a>
+      <a href="{{ url_for('textJonny') }}">text Jonny<i class="fa fa-user-circle-o"></i></a>
+      <a href="#">email<i class="fa fa-at"></i></a> 
     </div>
     <p><button type="submit">Send Text!</button></p>
   </div>
+  <br>
+  <br>
+  <br>
+  <a href="{{ url_for('logout') }}">Logout</a>
 </form>
 
 {% endblock %}
