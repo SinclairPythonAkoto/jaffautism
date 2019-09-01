@@ -110,24 +110,18 @@ def send_mail():
 		sendTo = request.form.get('emailReciever')
 		confirmEmail = request.form.get('confirm')
 		content = request.form.get('emailContent')
+		sub = request.form.get('emailSubject')
 
-		msg = Message('Jonny & Friends 4 Autism!', recipients=[sendTo])
+
+		msg = Message(f'{sub}', recipients=[sendTo])
 		msg.body = f'{content}\nKind regards\n\nSandra Ferguson\nJonny And Friends For Autism'
-
-		# return redirect(url_for('textJonny'))
-
-		# if sendTo == confirmEmail:
-		# 	msg = Message('Jonny & Friends 4 Autism!', recipients=[sendTo])
-		# 	msg.body = f'{content}\nKind regards\n\nSandra Ferguson\nJonny And Friends For Autism\n'
 
 		with app.open_resource('logo1.png') as logo:
 			msg.attach('logo1.png', 'image/png', logo.read())
 
 		mail.send(msg)
-		return redirect(url_for('textJonny'))
-		# else:
-		# 	error = "Please provide a valid email"
-		# 	return render_template('send_mail.html', error=error)
+		return redirect(url_for('JonnyAdmin'))
+	
 
 @app.route('/logout')
 @login_required
