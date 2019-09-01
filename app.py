@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g
 from functools import wraps
 import requests
@@ -11,8 +13,8 @@ app.config.update(dict(
     MAIL_PORT = 587,
     MAIL_USE_TLS = True,
     MAIL_USE_SSL = False,
-    MAIL_USERNAME = 'jonnyandfriends4autism.@gmail.com', # jonny email
-    MAIL_PASSWORD = '25-aug-2000', # email password
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME"), # email set in Heroku
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD"), # password set in Heroku
     MAIL_DEFAULT_SENDER = ('Jonny & Friends For Autism', 'jonnyandfriends4autism.@gmail.com'), #('NAME OR TITLE OF SENDER', 'SENDER EMAIL ADDRESS')
     MAIL_MAX_EMAILS = 5
 ))
@@ -21,7 +23,7 @@ mail = Mail(app)
 
 
 # need to set secret key for login_required function to work
-app.secret_key = "Shalieka"
+app.secret_key = os.getenv("SECRET_KEY")
 
 def login_required(f):
 	@wraps(f)
@@ -46,7 +48,7 @@ def textJonny():
 		api = clockwork.API(os.getenv("TEXTAPI"),)
 
 		message = clockwork.SMS(
-		    to = '447481790498',
+		    to = os.getenv("MOBILE_NUMBER"),
 		    message = f'FROM: {sender.lower()}\nNUMBER: {num}\n\n{txt.lower()}',
 		    from_name='jaffautism')
 
@@ -67,7 +69,7 @@ def login():
 	else:
 		user = request.form.get("username")
 		userPassword = request.form.get("password")
-		if user == 'sandra' and userPassword == 'sandra':
+		if user == os.getenv("JAFFA_ADMIN_LOGIN") and userPassword == os.getenv("JAFFA_ADMIN_PASSWORD"):
 			session['logged_in'] = True
 			flash('You have just logged in!')
 			return redirect(url_for('JonnyAdmin'))
