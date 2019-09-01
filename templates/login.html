@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
-{% block content %}
 
+{% block title %}
 <title>
-	{% block title %}
 		{% if title %}
 			{{ title }}
 		{% endif %}
-	{% endblock %}
 	<meta name="description" content="">
 	<meta name="author" content="">
 </title>
+{% endblock %}
 
+{% block content %}
 <main>
 	<h1 style="text-align: center" >Login</h1>
 	<form action="" method="post">

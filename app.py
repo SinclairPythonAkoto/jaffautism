@@ -65,7 +65,7 @@ def login():
 	title = "Jaffa Login"
 	error = None
 	if request.method == 'GET':
-		return render_template('login.html')
+		return render_template('login.html', title=title)
 	else:
 		user = request.form.get("username")
 		userPassword = request.form.get("password")
