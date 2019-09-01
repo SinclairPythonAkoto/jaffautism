@@ -11,8 +11,8 @@ app.config.update(dict(
     MAIL_PORT = 587,
     MAIL_USE_TLS = True,
     MAIL_USE_SSL = False,
-    MAIL_USERNAME = 'jonnyandfriends4autism.@gmail.com', # jonny email
-    MAIL_PASSWORD = '25-aug-2000', # email password
+    MAIL_USERNAME = '****', # jonny email
+    MAIL_PASSWORD = '****', # email password
     MAIL_DEFAULT_SENDER = ('Jonny & Friends For Autism', 'jonnyandfriends4autism.@gmail.com'), #('NAME OR TITLE OF SENDER', 'SENDER EMAIL ADDRESS')
     MAIL_MAX_EMAILS = 5
 ))
@@ -43,10 +43,10 @@ def textJonny():
 		sender = request.form.get('senderName')
 		num = request.form.get('contactNumber')
 		from clockwork import clockwork
-		api = clockwork.API('923a9a3d3f680a9ae95a5198afd6b1eadb428be1',)
+		api = clockwork.API('****',) # api key
 
 		message = clockwork.SMS(
-		    to = '447481790498',
+		    to = '****', # number text is being sent to 
 		    message = f'FROM: {sender.lower()}\nNUMBER: {num}\n\n{txt.lower()}',
 		    from_name='jaffautism')
 
@@ -67,7 +67,7 @@ def login():
 	else:
 		user = request.form.get("username")
 		userPassword = request.form.get("password")
-		if user == 'sandra' and userPassword == 'sandra':
+		if user == '****' and userPassword == '****':
 			session['logged_in'] = True
 			flash('You have just logged in!')
 			return redirect(url_for('JonnyAdmin'))
@@ -85,7 +85,7 @@ def JonnyAdmin():
 		num = request.form.get('number')
 		txt = request.form.get('sendText')
 		from clockwork import clockwork
-		api = clockwork.API('923a9a3d3f680a9ae95a5198afd6b1eadb428be1',)
+		api = clockwork.API('****',) # api key
 
 		message = clockwork.SMS(
 		    to = f'{num}',
