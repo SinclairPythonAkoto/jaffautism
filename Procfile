@@ -1,1 +1,1 @@
-web: gunicorn sinclairconnect.wsgi:application --log-file=-
+web: gunicorn jaffautism.wsgi:application --log-file=-
