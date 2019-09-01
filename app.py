@@ -45,7 +45,7 @@ def textJonny():
 		sender = request.form.get('senderName')
 		num = request.form.get('contactNumber')
 		from clockwork import clockwork
-		api = clockwork.API(os.getenv("TEXTAPI"),)
+		api = clockwork.API(os.getenv("TEXT_API"),)
 
 		message = clockwork.SMS(
 		    to = '447957176780',
@@ -87,7 +87,7 @@ def JonnyAdmin():
 		num = request.form.get('number')
 		txt = request.form.get('sendText')
 		from clockwork import clockwork
-		api = clockwork.API(os.getenv("TEXTAPI"),)
+		api = clockwork.API(os.getenv("TEXT_API"),)
 
 		message = clockwork.SMS(
 		    to = f'{num}',
