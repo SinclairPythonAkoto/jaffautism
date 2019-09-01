@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 
 
-{% block title %}
+
 <title>
-		{% if title %}
-			{{ title }}
-		{% endif %}
-	<meta name="description" content="">
-	<meta name="author" content="">
-</title>
+{% block title %}
+	{% if title %}
+		{{ title }}
+	{% endif %}
 {% endblock %}
+<meta name="description" content="">
+<meta name="author" content="">
+</title>
+
 
 {% block content %}
 <main>
