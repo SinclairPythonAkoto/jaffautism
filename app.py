@@ -48,7 +48,7 @@ def textJonny():
 		api = clockwork.API(os.getenv("TEXTAPI"),)
 
 		message = clockwork.SMS(
-		    to = os.getenv("MOBILE_NUMBER"),
+		    to = '447957176780',
 		    message = f'FROM: {sender.lower()}\nNUMBER: {num}\n\n{txt.lower()}',
 		    from_name='jaffautism')
 
