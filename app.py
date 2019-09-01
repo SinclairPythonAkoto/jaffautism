@@ -40,7 +40,7 @@ def login_required(f):
 def textJonny():
 	title = "JAFFA Text"
 	if request.method == 'GET':
-		return render_template('textJonny.html', text=text)
+		return render_template('textJonny.html', title=title)
 	else:
 		txt = request.form.get('sendText')
 		sender = request.form.get('senderName')
