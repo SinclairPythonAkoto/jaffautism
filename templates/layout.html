@@ -1,77 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-}
+  <title>{% block title %}{% endblock %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
 
-.title {
-  color: grey;
-  font-size: 18px;
-}
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
 
-button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
+  h1 {
+    text-align: center;
+  }
 
-a {
-  text-decoration: none;
-  font-size: 22px;
-  color: black;
-}
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: red;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
 
-textarea {
-  max-width: 100%;
-}
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
 
-button:hover, a:hover {
-  opacity: 0.7;
-}
+  textarea {
+    max-width: 100%;
+  }
 
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+
+  input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+
+  input[type=number], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+
+  input[type=password], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
   }
 
   input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   input[type=submit]:hover {
-  background-color: #45a049;
+    background-color: #45a049;
   }
 
   .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: red;
   }
 
   .topnav a {
@@ -84,7 +111,7 @@ input[type=text], select, textarea {
   }
 
   .topnav a:hover {
-    background-color: #1abc9c;
+    background-color: white;
     color: black;
   }
 
@@ -99,22 +126,40 @@ input[type=text], select, textarea {
     background-color: lightgray;
   }
 
+  .content {
+    padding: 20px;
+    background-color: rgba(26,188,156,0.591);
+  }
 
-</style>
+  </style>
 </head>
 <body>
   <div class="topnav">
-      <a href="{{ url_for('home') }}">Home</a>
-      <a href="{{ url_for('textMe') }}">Contact Me</a>
-      <a href="https://sinclairakotoportfolio.herokuapp.com/">Portfolio</a>
+      <a href="http://www.jaffautism.org">Return Home</a>
+      <a href="{{ url_for('textJonny') }}">Text Jonny!</a>
+      <a href="{{ url_for('login') }}">Admin</a>
   </div>
-{% block body %}
-  {% block content %}{% endblock %}
-{% endblock %}
+
+
+  <div class="container">
+
+    <!-- child template -->
+    {% block content %}{% endblock %}
+
+    <!-- errors message -->
+    {% if error %}
+      <p class="error"><strong>Error:</strong>{{ error }}</p>
+    {% endif %}
+
+    <!-- flash messages -->
+    {% for messages in get_flashed_messages() %}
+      {{ messages }}
+    {% endfor %}
+  
 </body>
 
 <footer>
-  <h6><a href="{{ url_for('home') }}">Home</a>   |   <a href="{{ url_for('textMe') }}">Text Me</a>    |   <a href="https://sinclairakotoportfolio.herokuapp.com/">Portfolio</a></h6>
+  <h6><a href="http://www.jaffautism.org">Return Home</a>   |   <a href="{{ url_for('textJonny') }}">Text Jonny!</a>    |   <a href="{{ url_for('login') }}">Admin</a></h6>
 
   <h6>Design.  Build.  Apply!</h6>
 </footer>

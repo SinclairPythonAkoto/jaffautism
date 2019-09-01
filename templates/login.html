@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<title>
+	{% block title %}
+		{% if title %}
+			{{ title }}
+		{% endif %}
+	{% endblock %}
+	<meta name="description" content="">
+	<meta name="author" content="">
+</title>
+
+<main>
+	<h1 style="text-align: center" >Login</h1>
+	<form action="" method="post">
+	<div class="card">
+		<img src="static/jonnyPic.jpg" alt="LoginJonny" style="width:100%">
+		
+		<p>Please enter your credentials below to login in.</p>
+		<br>
+		<input type="text" name="username" placeholder="Enter Username" required>
+		<input type="password" name="password" placeholder="Enter Password" required>
+		<br>
+		<button type="submit">LOGIN</button>
+	</div>
+	</form>
+</main>
+
+{% endblock %}
