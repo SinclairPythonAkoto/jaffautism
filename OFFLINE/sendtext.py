@@ -79,8 +79,9 @@ def login():
 @app.route('/JonnyAdmin', methods=['GET', 'POST'])
 @login_required
 def JonnyAdmin():
+	title = "JAFFA Admin!"
 	if request.method == 'GET':
-		return render_template('JonnyAdmin.html')
+		return render_template('JonnyAdmin.html', title=title)
 	else:
 		num = request.form.get('number')
 		txt = request.form.get('sendText')

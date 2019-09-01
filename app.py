@@ -38,8 +38,9 @@ def login_required(f):
 @app.route('/', methods=['GET', 'POST'])
 # @login_required
 def textJonny():
+	title = "JAFFA Text"
 	if request.method == 'GET':
-		return render_template('textJonny.html')
+		return render_template('textJonny.html', text=text)
 	else:
 		txt = request.form.get('sendText')
 		sender = request.form.get('senderName')
@@ -48,21 +49,21 @@ def textJonny():
 		api = clockwork.API(os.getenv("TEXT_API"),)
 
 		message = clockwork.SMS(
-		    to = '447957176780',
+		    to = os.getenv("MOBILE_NUMBER"),
 		    message = f'FROM: {sender.lower()}\nNUMBER: {num}\n\n{txt.lower()}',
 		    from_name='jaffautism')
 
 		response = api.send(message)
 
 		if response.success:
-			return render_template('textJonny.html', txt=txt, sender=sender)
+			return render_template('textJonny.html', title=title, txt=txt, sender=sender)
 		else:
 			return redirect(url_for('textJonny'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	title = "Jaffa Login"
+	title = "JAFFA Login"
 	error = None
 	if request.method == 'GET':
 		return render_template('login.html', title=title)
@@ -81,8 +82,9 @@ def login():
 @app.route('/JonnyAdmin', methods=['GET', 'POST'])
 @login_required
 def JonnyAdmin():
+	title = "JAFFA Admin"
 	if request.method == 'GET':
-		return render_template('JonnyAdmin.html')
+		return render_template('JonnyAdmin.html', title=title)
 	else:
 		num = request.form.get('number')
 		txt = request.form.get('sendText')
@@ -106,8 +108,9 @@ def JonnyAdmin():
 @app.route('/send_mail', methods=['GET', 'POST'])
 @login_required
 def send_mail():
+	title = "JAFFA Email"
 	if request.method == 'GET':
-		return render_template('send_mail.html')
+		return render_template('send_mail.html', title=title)
 	else:
 		sendTo = request.form.get('emailReciever')
 		confirmEmail = request.form.get('confirm')

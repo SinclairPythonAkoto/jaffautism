@@ -1,5 +1,15 @@
 {% extends "layout.html" %}
 
+<title>
+{% block title %}
+	{% if title %}
+		{{ title }}
+	{% endif %}
+{% endblock %}
+<meta name="description" content="Send emails on behalf of Jonny And Friends For Autism to any email recipient you choose.">
+<meta name="author" content="SinclairPythonAkoto">
+</title>
+
 {% block content %}
 
 <h1>Jonny & Friends 4 Autism<br>Email</h1>
