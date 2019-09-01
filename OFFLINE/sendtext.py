@@ -1,8 +1,24 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g
 from functools import wraps
 import requests
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
+
+app.config.update(dict(
+    DEBUG = True,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 587,
+    MAIL_USE_TLS = True,
+    MAIL_USE_SSL = False,
+    MAIL_USERNAME = 'jonnyandfriends4autism.@gmail.com', # jonny email
+    MAIL_PASSWORD = '25-aug-2000', # email password
+    MAIL_DEFAULT_SENDER = ('Jonny & Friends For Autism', 'jonnyandfriends4autism.@gmail.com'), #('NAME OR TITLE OF SENDER', 'SENDER EMAIL ADDRESS')
+    MAIL_MAX_EMAILS = 5
+))
+
+mail = Mail(app)
+
 
 # need to set secret key for login_required function to work
 app.secret_key = "Shalieka"
@@ -25,13 +41,14 @@ def textJonny():
 	else:
 		txt = request.form.get('sendText')
 		sender = request.form.get('senderName')
+		num = request.form.get('contactNumber')
 		from clockwork import clockwork
 		api = clockwork.API('923a9a3d3f680a9ae95a5198afd6b1eadb428be1',)
 
 		message = clockwork.SMS(
 		    to = '447481790498',
-		    message = f'{txt}',
-		    from_name=f'{sender}')
+		    message = f'FROM: {sender.lower()}\nNUMBER: {num}\n\n{txt.lower()}',
+		    from_name='jaffautism')
 
 		response = api.send(message)
 
@@ -72,8 +89,8 @@ def JonnyAdmin():
 
 		message = clockwork.SMS(
 		    to = f'{num}',
-		    message = f'{txt}',
-		    from_name='MrAkotoApps')
+		    message = f'{txt.lower()}',
+		    from_name='jaffautism')
 
 		response = api.send(message)
 
@@ -83,6 +100,34 @@ def JonnyAdmin():
 			flash('message failed to send.')
 			return redirect(url_for('JonnyAdmin'))
 
+
+@app.route('/send_mail', methods=['GET', 'POST'])
+@login_required
+def send_mail():
+	if request.method == 'GET':
+		return render_template('send_mail.html')
+	else:
+		sendTo = request.form.get('emailReciever')
+		confirmEmail = request.form.get('confirm')
+		content = request.form.get('emailContent')
+
+		msg = Message('Jonny & Friends 4 Autism!', recipients=[sendTo])
+		msg.body = f'{content}\nKind regards\n\nSandra Ferguson\nJonny And Friends For Autism'
+
+		# return redirect(url_for('textJonny'))
+
+		# if sendTo == confirmEmail:
+		# 	msg = Message('Jonny & Friends 4 Autism!', recipients=[sendTo])
+		# 	msg.body = f'{content}\nKind regards\n\nSandra Ferguson\nJonny And Friends For Autism\n'
+
+		with app.open_resource('logo1.png') as logo:
+			msg.attach('logo1.png', 'image/png', logo.read())
+
+		mail.send(msg)
+		return redirect(url_for('textJonny'))
+		# else:
+		# 	error = "Please provide a valid email"
+		# 	return render_template('send_mail.html', error=error)
 
 @app.route('/logout')
 @login_required
